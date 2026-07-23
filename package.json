@@ -30,8 +30,16 @@
     "https",
     "model-context-protocol"
   ],
-  "author": "",
+  "author": "oyji1992",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oyji1992/ftp-upload-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oyji1992/ftp-upload-mcp/issues"
+  },
+  "homepage": "https://github.com/oyji1992/ftp-upload-mcp#readme",
   "publishConfig": {
     "access": "public"
   },
