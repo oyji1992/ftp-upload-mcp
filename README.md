@@ -109,23 +109,6 @@ npm run build
 npm start
 ```
 
-## Release
-
-| Workflow | Trigger |
-|----------|---------|
-| `CI` | push / PR to `main` or `master` |
-| `Publish to npm` | tag `v*` |
-
-1. Add GitHub secret `NPM_TOKEN` (npm Automation token)
-2. Release:
-
-```bash
-npm version patch
-git push origin master --tags
-```
-
-Tag without `v` must match `package.json` version (`npm version` creates `v1.0.1`).
-
 ## License
 
 MIT

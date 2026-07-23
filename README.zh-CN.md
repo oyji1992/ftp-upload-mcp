@@ -109,23 +109,6 @@ npm run build
 npm start
 ```
 
-## 发版
-
-| Workflow | 触发 |
-|----------|------|
-| `CI` | push / PR 到 `main` 或 `master` |
-| `Publish to npm` | tag `v*` |
-
-1. GitHub Secret 配置 `NPM_TOKEN`（npm Automation token）
-2. 发版：
-
-```bash
-npm version patch
-git push origin master --tags
-```
-
-tag 去掉 `v` 后须等于 `package.json` 的 version（`npm version` 会生成 `v1.0.1`）。
-
 ## License
 
 MIT
