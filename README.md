@@ -17,7 +17,7 @@ The FTP directory and `MEDIA_PUBLIC_BASE_URL` must point at the same files.
 ## Usage
 
 ```bash
-npx -y @oyji1992/ftp-upload-mcp
+npx -y @oyji1992/ftp-upload-mcp@latest
 ```
 
 ### Generic MCP config (Claude Desktop / Cursor / etc.)
@@ -27,7 +27,7 @@ npx -y @oyji1992/ftp-upload-mcp
   "mcpServers": {
     "ftp-upload": {
       "command": "npx",
-      "args": ["-y", "@oyji1992/ftp-upload-mcp"],
+      "args": ["-y", "@oyji1992/ftp-upload-mcp@latest"],
       "env": {
         "MEDIA_FTP_HOST": "<ftp-host>",
         "MEDIA_FTP_PORT": "21",
@@ -47,7 +47,7 @@ npx -y @oyji1992/ftp-upload-mcp
 [mcp_servers.ftp-upload]
 type = "stdio"
 command = "npx"
-args = ["-y", "@oyji1992/ftp-upload-mcp"]
+args = ["-y", "@oyji1992/ftp-upload-mcp@latest"]
 startup_timeout_sec = 30
 
 [mcp_servers.ftp-upload.env]
@@ -59,7 +59,11 @@ MEDIA_PUBLIC_BASE_URL = "https://<cdn-host>/files"
 MEDIA_REMOTE_DIR = "media"
 ```
 
-Pin version if needed: `@oyji1992/ftp-upload-mcp@1.0.1`.
+The `@latest` dist-tag is intentional. In this package's own source checkout,
+npm 11 can mistake the root project for the requested package and then fail
+because a package does not have a self-linked bin. Resolving the published
+dist-tag avoids that ambiguity. An exact version such as
+`@oyji1992/ftp-upload-mcp@1.0.2` also works from ordinary consumer directories.
 
 ## Environment
 
@@ -108,6 +112,10 @@ npm install
 npm run build
 npm start
 ```
+
+Run `npm test` for the end-to-end test. It starts an isolated FTP server on
+localhost, invokes `upload_file` through MCP stdio, and verifies the uploaded
+file on disk. It never uses the FTP credentials from your MCP config.
 
 ## License
 

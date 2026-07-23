@@ -1,6 +1,6 @@
 {
   "name": "@oyji1992/ftp-upload-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lightweight MCP server: upload local files via FTP and return permanent public HTTPS URLs",
   "type": "module",
   "main": "dist/index.js",
@@ -17,6 +17,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
+    "test": "npm run build && node --test test/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
@@ -49,6 +50,7 @@
     "zod": "^3.25.28"
   },
   "devDependencies": {
+    "@electerm/ftp-srv": "^1.0.5",
     "@types/node": "^22.15.21",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"

@@ -17,7 +17,7 @@ FTP 落盘目录与 `MEDIA_PUBLIC_BASE_URL` 必须对应同一批文件。
 ## 使用
 
 ```bash
-npx -y @oyji1992/ftp-upload-mcp
+npx -y @oyji1992/ftp-upload-mcp@latest
 ```
 
 ### 通用 MCP 配置（Claude Desktop / Cursor 等）
@@ -27,7 +27,7 @@ npx -y @oyji1992/ftp-upload-mcp
   "mcpServers": {
     "ftp-upload": {
       "command": "npx",
-      "args": ["-y", "@oyji1992/ftp-upload-mcp"],
+      "args": ["-y", "@oyji1992/ftp-upload-mcp@latest"],
       "env": {
         "MEDIA_FTP_HOST": "<ftp-host>",
         "MEDIA_FTP_PORT": "21",
@@ -47,7 +47,7 @@ npx -y @oyji1992/ftp-upload-mcp
 [mcp_servers.ftp-upload]
 type = "stdio"
 command = "npx"
-args = ["-y", "@oyji1992/ftp-upload-mcp"]
+args = ["-y", "@oyji1992/ftp-upload-mcp@latest"]
 startup_timeout_sec = 30
 
 [mcp_servers.ftp-upload.env]
@@ -59,7 +59,10 @@ MEDIA_PUBLIC_BASE_URL = "https://<cdn-host>/files"
 MEDIA_REMOTE_DIR = "media"
 ```
 
-需要锁版本时用：`@oyji1992/ftp-upload-mcp@1.0.1`。
+这里有意使用 `@latest` dist-tag。如果正好在本包的源码仓库中运行，npm 11
+可能把根项目误判成目标包；但根包不会为自己创建 bin 链接，最终会报
+`'ftp-upload-mcp' is not recognized`。解析已发布的 dist-tag 可以消除这个歧义。
+在普通消费者目录中，也可以锁定版本：`@oyji1992/ftp-upload-mcp@1.0.2`。
 
 ## 环境变量
 
@@ -108,6 +111,10 @@ npm install
 npm run build
 npm start
 ```
+
+运行 `npm test` 可执行端到端测试。测试会在本机启动隔离的 FTP 服务，通过 MCP
+stdio 调用 `upload_file`，再检查上传后的落盘文件；不会使用 MCP 配置中的真实
+FTP 凭据。
 
 ## License
 

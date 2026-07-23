@@ -1,13 +1,18 @@
 #!/usr/bin/env node
+import { createRequire } from "node:module";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { loadConfig } from "./config.js";
 import { uploadFile, uploadFiles } from "./uploader.js";
 
+const packageManifest = createRequire(import.meta.url)("../package.json") as {
+  version: string;
+};
+
 const server = new McpServer({
   name: "ftp-upload-mcp",
-  version: "1.0.0",
+  version: packageManifest.version,
 });
 
 function jsonText(data: unknown): { content: [{ type: "text"; text: string }] } {
