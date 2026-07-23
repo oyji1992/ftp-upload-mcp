@@ -20,6 +20,8 @@ FTP 落盘目录与 `MEDIA_PUBLIC_BASE_URL` 必须对应同一批文件。
 npx -y @oyji1992/ftp-upload-mcp
 ```
 
+### 通用 MCP 配置（Claude Desktop / Cursor 等）
+
 ```json
 {
   "mcpServers": {
@@ -28,6 +30,7 @@ npx -y @oyji1992/ftp-upload-mcp
       "args": ["-y", "@oyji1992/ftp-upload-mcp"],
       "env": {
         "MEDIA_FTP_HOST": "<ftp-host>",
+        "MEDIA_FTP_PORT": "21",
         "MEDIA_FTP_USER": "<ftp-user>",
         "MEDIA_FTP_PASSWORD": "<ftp-password>",
         "MEDIA_PUBLIC_BASE_URL": "https://<cdn-host>/files",
@@ -38,18 +41,38 @@ npx -y @oyji1992/ftp-upload-mcp
 }
 ```
 
-需要锁版本时用：`@oyji1992/ftp-upload-mcp@1.0.0`。
+### Codex（`~/.codex/config.toml`）
+
+```toml
+[mcp_servers.ftp-upload]
+type = "stdio"
+command = "npx"
+args = ["-y", "@oyji1992/ftp-upload-mcp"]
+startup_timeout_sec = 30
+
+[mcp_servers.ftp-upload.env]
+MEDIA_FTP_HOST = "<ftp-host>"
+MEDIA_FTP_PORT = "21"
+MEDIA_FTP_USER = "<ftp-user>"
+MEDIA_FTP_PASSWORD = "<ftp-password>"
+MEDIA_PUBLIC_BASE_URL = "https://<cdn-host>/files"
+MEDIA_REMOTE_DIR = "media"
+```
+
+需要锁版本时用：`@oyji1992/ftp-upload-mcp@1.0.1`。
 
 ## 环境变量
 
-| 变量 | 必填 | 默认 | 说明 |
-|------|------|------|------|
-| `MEDIA_FTP_HOST` | 是 | | FTP 主机 |
-| `MEDIA_FTP_USER` | 是 | | 用户名 |
-| `MEDIA_FTP_PASSWORD` | 是 | | 密码 |
-| `MEDIA_PUBLIC_BASE_URL` | 是 | | HTTPS 基址（必须 `https://`） |
-| `MEDIA_FTP_PORT` | 否 | `21` | 端口 |
-| `MEDIA_REMOTE_DIR` | 否 | 空 | 远端子目录 |
+MCP 配置里建议全部写出。部分变量未写时有默认值。
+
+| 变量 | 默认 | 说明 |
+|------|------|------|
+| `MEDIA_FTP_HOST` | 无 | FTP 主机 |
+| `MEDIA_FTP_PORT` | `21` | FTP 端口 |
+| `MEDIA_FTP_USER` | 无 | 用户名 |
+| `MEDIA_FTP_PASSWORD` | 无 | 密码 |
+| `MEDIA_PUBLIC_BASE_URL` | 无 | HTTPS 基址（必须 `https://`） |
+| `MEDIA_REMOTE_DIR` | 空 | FTP 登录目录下的子路径 |
 
 仅支持普通 FTP（无 FTPS/SFTP）。真实凭据不要写入 git。
 
@@ -102,13 +125,6 @@ git push origin master --tags
 ```
 
 tag 去掉 `v` 后须等于 `package.json` 的 version（`npm version` 会生成 `v1.0.1`）。
-
-首次：
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
 
 ## License
 
