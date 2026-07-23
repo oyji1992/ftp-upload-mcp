@@ -1,5 +1,5 @@
 {
-  "name": "ftp-upload-mcp",
+  "name": "@oyji1992/ftp-upload-mcp",
   "version": "1.0.0",
   "description": "Lightweight MCP server: upload local files via FTP and return permanent public HTTPS URLs",
   "type": "module",

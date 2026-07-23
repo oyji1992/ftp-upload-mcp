@@ -17,7 +17,7 @@ The FTP directory and `MEDIA_PUBLIC_BASE_URL` must point at the same files.
 ## Usage
 
 ```bash
-npx -y ftp-upload-mcp
+npx -y @oyji1992/ftp-upload-mcp
 ```
 
 ```json
@@ -25,7 +25,7 @@ npx -y ftp-upload-mcp
   "mcpServers": {
     "ftp-upload": {
       "command": "npx",
-      "args": ["-y", "ftp-upload-mcp"],
+      "args": ["-y", "@oyji1992/ftp-upload-mcp"],
       "env": {
         "MEDIA_FTP_HOST": "<ftp-host>",
         "MEDIA_FTP_USER": "<ftp-user>",
@@ -38,7 +38,7 @@ npx -y ftp-upload-mcp
 }
 ```
 
-Pin version if needed: `ftp-upload-mcp@1.0.0`.
+Pin version if needed: `@oyji1992/ftp-upload-mcp@1.0.0`.
 
 ## Environment
 

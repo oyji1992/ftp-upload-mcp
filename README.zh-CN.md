@@ -17,7 +17,7 @@ FTP 落盘目录与 `MEDIA_PUBLIC_BASE_URL` 必须对应同一批文件。
 ## 使用
 
 ```bash
-npx -y ftp-upload-mcp
+npx -y @oyji1992/ftp-upload-mcp
 ```
 
 ```json
@@ -25,7 +25,7 @@ npx -y ftp-upload-mcp
   "mcpServers": {
     "ftp-upload": {
       "command": "npx",
-      "args": ["-y", "ftp-upload-mcp"],
+      "args": ["-y", "@oyji1992/ftp-upload-mcp"],
       "env": {
         "MEDIA_FTP_HOST": "<ftp-host>",
         "MEDIA_FTP_USER": "<ftp-user>",
@@ -38,7 +38,7 @@ npx -y ftp-upload-mcp
 }
 ```
 
-需要锁版本时用：`ftp-upload-mcp@1.0.0`。
+需要锁版本时用：`@oyji1992/ftp-upload-mcp@1.0.0`。
 
 ## 环境变量
 
